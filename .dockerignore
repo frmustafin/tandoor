@@ -1,0 +1,10 @@
+.env
+.env.*
+build/
+.gradle/
+.idea/
+.gigaide/
+data/
+docs/
+*.md
+out/

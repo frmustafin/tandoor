@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:tandoor;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+    username: sa
+    password:
+
+telegram:
+  token: test-token
+  channel-id: "@test_channel"
+  polling-enabled: false
+
+bakery:
+  timers-enabled: false
+  bootstrap-admins: 1001

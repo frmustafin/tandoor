@@ -1,0 +1,11 @@
+# Local run that mirrors the hosting tier: 512 MB limit, data on a volume, secrets from .env.
+services:
+  bot:
+    build: .
+    env_file: .env
+    environment:
+      CHANNEL_ID: "@tandoor_on_dubrava"
+    volumes:
+      - ./data:/data
+    mem_limit: 512m
+    restart: unless-stopped

@@ -1,0 +1,19 @@
+# Secrets: the bot token lives here and must never be committed.
+.env
+.env.*
+!.env.example
+
+# Runtime data: the H2 database file and backups.
+/data/
+
+# Build
+/build/
+/.gradle/
+/out/
+*.class
+
+# IDE
+/.idea/
+/.gigaide/
+*.iml
+/.vscode/

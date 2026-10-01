@@ -1,0 +1,4 @@
+# The wrapper script runs inside a Linux image; CRLF there breaks the shebang.
+gradlew  text eol=lf
+*.bat    text eol=crlf
+*.jar    binary
