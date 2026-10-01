@@ -1,6 +1,9 @@
-# Local run that mirrors the hosting tier: 512 MB limit, data on a volume, secrets from .env.
+# The same file runs the bot locally and on the server: 512 MB limit, data on a volume,
+# secrets from .env. The image has a fixed name so that one built here can be loaded on the
+# server (too small to run the Gradle build) and started there with `docker compose up -d`.
 services:
   bot:
+    image: tandoor-bot:latest
     build: .
     env_file: .env
     environment:

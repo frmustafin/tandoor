@@ -36,8 +36,33 @@ Spring сам подхватывает `.env` (`spring.config.import`), наст
 docker compose up --build
 ```
 
-Контейнер ограничен 512 МБ как на хостинге, база лежит в `./data`, токен берётся из `.env`.
-На хостинге нужно задать переменные окружения и примонтировать постоянное хранилище в `/data`.
+Контейнер ограничен 512 МБ, база лежит в `./data`, токен берётся из `.env`.
+
+## Деплой на сервер
+
+Серверу с 1 ГБ памяти сборка Gradle не по силам, поэтому образ собирается на рабочей машине
+и передаётся готовым. На сервере нужны только Docker, этот репозиторий (ради `docker-compose.yml`)
+и файл `.env` с `BOT_TOKEN` и `BOOTSTRAP_ADMINS`.
+
+На рабочей машине (Git Bash):
+
+```bash
+docker compose build
+docker save tandoor-bot:latest | gzip > build/tandoor-bot.tar.gz
+scp build/tandoor-bot.tar.gz root@<сервер>:/root/
+```
+
+На сервере, в папке репозитория:
+
+```bash
+git pull
+docker load < /root/tandoor-bot.tar.gz
+docker compose up -d
+docker compose logs --tail 20 bot
+```
+
+Одновременно может работать только один экземпляр бота с одним токеном: перед запуском на сервере
+локальный нужно остановить (`docker compose stop`).
 
 ## Переменные окружения
 
