@@ -61,6 +61,17 @@ docker compose up -d
 docker compose logs --tail 20 bot
 ```
 
+Если на сервере нет плагина Compose (`docker compose` отвечает «unknown shorthand flag»), то же самое
+делается обычным `docker run`; значения в `.env` в этом случае пишутся без кавычек:
+
+```bash
+docker rm -f tandoor-bot 2>/dev/null
+docker run -d --name tandoor-bot --restart unless-stopped --memory 512m \
+  --env-file .env -e CHANNEL_ID=@tandoor_on_dubrava \
+  -v "$PWD/data:/data" tandoor-bot:latest
+docker logs --tail 20 tandoor-bot
+```
+
 Одновременно может работать только один экземпляр бота с одним токеном: перед запуском на сервере
 локальный нужно остановить (`docker compose stop`).
 
